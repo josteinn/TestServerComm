@@ -5,9 +5,7 @@ const rateLimit = require('express-rate-limit');
 const authUtils = require('./auth_utils.js');
 
 const server = express();
-const PORT = process.env.PORT || 3000;
 const jimp = require('jimp');
-
 server.set('trust proxy', 1); // for rate limiter
 
 // rate limiter ------------------------------------
@@ -18,7 +16,7 @@ const limiter = rateLimit({
 	legacyHeaders: false,
 });
 
-server.set("port", PORT);
+
 server.use(limiter);
 server.use(cors());
 server.use(express.static("public"));
@@ -299,6 +297,7 @@ function getAgeTxt(name, age) {
 }
 
 // starting the server ------------------------------------------
-server.listen(server.get("port"), function () {
-	console.log("server running", server.get("port"));
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
 });

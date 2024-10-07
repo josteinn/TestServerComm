@@ -11,7 +11,7 @@ utils.decodeCred = function (credString) {
 
 	try {
 
-		let b64String = credString.replace("basic ", ""); // 'am9zdGVpbm46a29uZ29sYXY='	
+		let b64String = credString.replace(/basic /i, ""); // 'am9zdGVpbm46a29uZ29sYXY='	
 		let asciiString = Buffer.from(b64String, "base64").toString("ascii"); // 'josteinn:kongolav'	
 		cred.username = asciiString.replace(/:.*/, ""); //josteinn	
 		cred.password = asciiString.replace(cred.username + ":", ""); //kongolav
@@ -65,6 +65,8 @@ utils.createToken = function (username, userID) {
 
 // ---------------------------------------------
 utils.verifyToken = function (token) {
+
+	token = token.replace(/bearer /i, "");
 
 	let tokenArr = token.split(".");
 	let openPart = tokenArr[0] + "." + tokenArr[1];

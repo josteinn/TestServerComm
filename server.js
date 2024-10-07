@@ -254,12 +254,12 @@ server.post("/ex_auth/login", async function(req, res, next) {
 // Retrieve a list of users ----------------------------------------
 server.get("/ex_auth/userlist", (req, res, next) => {
 
-	let token = req.headers.authorization;
+	let token = req.headers.authorization;	
 
 	if (!token) {
         res.status(401).json({error: "No token"}).end();
         return;
-    }
+    }	
 
 	let payload = authUtils.verifyToken(token);
     if (!payload) {

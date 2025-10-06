@@ -26,7 +26,6 @@ server.use(express.raw({limit:'1mb'}));
 const mem = multer.memoryStorage();
 const upload = multer({ storage: mem, limits: { fileSize: 1000000, fieldSize: 500, fields: 100, files: 1, headerPairs: 100 } }); //save to buffer
 
-
 // Retrieve text-data in query -----------------------------------------
 server.get("/ex_query/person", (req, res, next) => {
 
@@ -278,6 +277,12 @@ server.get("/ex_auth/userlist", (req, res, next) => {
 	
 	//send the response to the client
 	res.status(200).json(userlist).end();
+});
+
+//---------------------------------------------------------------
+// If none above - send 404 error ------------------
+server.use((req, res) => {
+	res.status(404).send("This route/address is not available on the server.").end();
 });
 
 //---------------------------------------------------------------

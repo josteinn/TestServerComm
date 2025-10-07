@@ -39,7 +39,7 @@ server.get("/ex_query/person", (req, res, next) => {
 		return;
 	}
 
-	let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+	let outputTxt = `Hi there! The server got the info about ${name} from the URL-variables. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 	
 	//send the response to the client
 	res.status(200).send(outputTxt.trim()).end();
@@ -58,7 +58,7 @@ server.get("/ex_params/person/:name/:age", (req, res, next) => {
 		return;
 	}
 	
-	let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+	let outputTxt = `Hi there! The server got the info about ${name} from route parameters. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 	
 	//send the response to the client
 	res.status(200).send(outputTxt).end();
@@ -77,7 +77,7 @@ server.get("/ex_headers/person", (req, res, next) => {
 		return;
 	}
 	
-	let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+	let outputTxt = `Hi there! The server got the info about ${name} from the header. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 	
 	//send the response to the client
 	res.status(200).send(outputTxt).end();
@@ -96,7 +96,7 @@ server.post("/ex_body/person", (req, res, next) => {
 		return;
 	}
 	
-	let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+	let outputTxt = `Hi there! The server got the info about ${name} from JSON in the body. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 	
 	//send the response to the client
 	res.status(200).send(outputTxt).end();
@@ -115,7 +115,7 @@ server.post("/ex_formdata/person", upload.none(), (req, res, next) => {
 		return;
 	}
 	
-	let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+	let outputTxt = `Hi there! The server got the info about ${name} from the form-data. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 	
 	//send the response to the client
 	res.status(200).send(outputTxt).end();
@@ -140,7 +140,7 @@ server.post("/ex_file/person", upload.single("theFile"), async (req, res, next) 
 		jimpImg.greyscale();
 		jimpImg.resize(100, 100);			
 		imageData = await jimpImg.getBase64Async("image/png"); //image as Base64
-		let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+		let outputTxt = `Hi there! The server got the info about ${name} from the multipart form-data. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 	
 		//send the response to the client
 		res.status(200).json({msg:outputTxt, img: imageData}).end();		
@@ -169,7 +169,7 @@ server.post("/ex_file_base64/person", async (req, res, next) => {
 		jimpImg.greyscale();
 		jimpImg.resize(100, 100);	
 		let imageData = await jimpImg.getBase64Async("image/png"); //image as Base64
-		let outputTxt = `Hi there! The server got the info about ${name}. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
+		let outputTxt = `Hi there! The server got the info about ${name} from the JSON in the body. Note that ${name} spelled backwards is "${getBackwards(name)}". ${getAgeTxt(name, age)}`;
 		
 		//send the response to the client
 		res.status(200).json({msg:outputTxt, img: imageData}).end();
